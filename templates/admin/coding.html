@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2 class="mb-4">Manage Coding Problems</h2>
+
+<div class="card mb-5 shadow-sm">
+    <div class="card-header bg-primary text-white">Add New Problem</div>
+    <div class="card-body">
+        <form method="POST">
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label>Title</label>
+                    <input type="text" name="title" class="form-control" required>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label>Topic</label>
+                    <input type="text" name="topic" class="form-control" required placeholder="e.g. Arrays">
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label>Difficulty</label>
+                    <select name="difficulty" class="form-select">
+                        <option>Easy</option>
+                        <option>Medium</option>
+                        <option>Hard</option>
+                    </select>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label>Description</label>
+                <textarea name="description" class="form-control" rows="3" required></textarea>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label>Example Input</label>
+                    <input type="text" name="example_input" class="form-control" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label>Example Output</label>
+                    <input type="text" name="example_output" class="form-control" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label>Constraints</label>
+                    <input type="text" name="constraints" class="form-control">
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label>Expected Approach</label>
+                    <input type="text" name="expected_approach" class="form-control">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success">Add Problem</button>
+        </form>
+    </div>
+</div>
+
+<h4>Existing Problems</h4>
+<div class="table-responsive">
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Topic</th>
+                <th>Difficulty</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for p in problems %}
+            <tr>
+                <td>{{ p.title }}</td>
+                <td>{{ p.topic }}</td>
+                <td>{{ p.difficulty }}</td>
+                <td>
+                    <a href="{{ url_for('admin.delete_coding', p_id=p._id) }}" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

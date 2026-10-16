@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2 class="mb-4">Manage Study Resources</h2>
+
+<div class="card mb-5 shadow-sm">
+    <div class="card-header bg-primary text-white">Add New Resource</div>
+    <div class="card-body">
+        <form method="POST">
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label>Title</label>
+                    <input type="text" name="title" class="form-control" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label>Category</label>
+                    <input type="text" name="category" class="form-control" required placeholder="e.g. Interview tips">
+                </div>
+            </div>
+            <div class="mb-3">
+                <label>Short Description</label>
+                <input type="text" name="description" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label>Content (Material text)</label>
+                <textarea name="content" class="form-control" rows="5" required></textarea>
+            </div>
+            <div class="mb-3">
+                <label>Date Added</label>
+                <input type="date" name="date_added" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-success">Add Resource</button>
+        </form>
+    </div>
+</div>
+
+<h4>Existing Resources</h4>
+<div class="table-responsive">
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Category</th>
+                <th>Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for r in resources %}
+            <tr>
+                <td>{{ r.title }}</td>
+                <td>{{ r.category }}</td>
+                <td>{{ r.date_added }}</td>
+                <td>
+                    <a href="{{ url_for('admin.delete_resource', r_id=r._id) }}" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

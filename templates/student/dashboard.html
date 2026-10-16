@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-12">
+        <h2>Welcome, {{ session.name }}!</h2>
+        <p class="text-muted">Here is your preparation progress.</p>
+    </div>
+</div>
+
+<div class="row mb-4">
+    <div class="col-md-4">
+        <div class="card text-white bg-primary mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Aptitude Tests</h5>
+                <p class="card-text display-4">{{ progress.aptitude_attempted|default(0) }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-white bg-success mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Coding Problems</h5>
+                <p class="card-text display-4">{{ progress.coding_attempted|default(0) }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-white bg-info mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Mock Tests</h5>
+                <p class="card-text display-4">{{ progress.mock_tests_completed|default(0) }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <h4>Recent Quiz Results</h4>
+        {% if recent_quizzes %}
+        <ul class="list-group mb-4">
+            {% for quiz in recent_quizzes %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                {{ quiz.category }} ({{ quiz.date.strftime('%Y-%m-%d') }})
+                <span class="badge bg-primary rounded-pill">{{ "%.1f"|format(quiz.percentage) }}%</span>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p class="text-muted">No quizzes attempted yet.</p>
+        {% endif %}
+    </div>
+    
+    <div class="col-md-6">
+        <h4>Recent Code Submissions</h4>
+        {% if coding_subs %}
+        <ul class="list-group mb-4">
+            {% for sub in coding_subs %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                {{ sub.problem_title }} - {{ sub.language }}
+                <span class="badge bg-success rounded-pill">{{ sub.status }}</span>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p class="text-muted">No code submitted yet.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

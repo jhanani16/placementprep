@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="p-5 mb-4 bg-light rounded-3 text-center">
+    <div class="container-fluid py-5">
+        <h1 class="display-5 fw-bold">Placement Preparation Platform</h1>
+        <p class="col-md-8 mx-auto fs-4">Prepare for campus placements with aptitude tests, coding challenges, interview questions, and more. A comprehensive platform for students.</p>
+        <a href="{{ url_for('auth.register') }}" class="btn btn-primary btn-lg">Get Started</a>
+        <a href="{{ url_for('auth.login') }}" class="btn btn-outline-secondary btn-lg">Login</a>
+    </div>
+</div>
+
+<div class="row text-center mt-5">
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">Aptitude Practice</h5>
+                <p class="card-text">Practice quantitative, logical, and verbal questions with instant scoring.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">Coding Practice</h5>
+                <p class="card-text">Solve algorithmic challenges commonly asked in technical interviews.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">Mock Interviews & Tests</h5>
+                <p class="card-text">Take full-length mock tests tailored for top IT companies.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

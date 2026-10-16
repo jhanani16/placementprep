@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card text-center shadow">
+            <div class="card-header bg-warning text-dark">
+                <h3>Mock Test Results: {{ result.test_title }}</h3>
+            </div>
+            <div class="card-body py-5">
+                <h1 class="display-1 {% if result.percentage >= 70 %}text-success{% elif result.percentage >= 40 %}text-warning{% else %}text-danger{% endif %}">
+                    {{ "%.1f"|format(result.percentage) }}%
+                </h1>
+                <h4 class="mt-4">Score: {{ result.score }} / {{ result.total }}</h4>
+                <p class="text-muted mt-3">Completed on: {{ result.date.strftime('%Y-%m-%d %H:%M:%S') }}</p>
+                
+                <div class="mt-5">
+                    <a href="{{ url_for('mock_test.index') }}" class="btn btn-outline-primary">Back to Mock Tests</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

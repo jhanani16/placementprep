@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2 class="mb-4">Admin Dashboard</h2>
+
+<div class="row">
+    <div class="col-md-4 col-sm-6 mb-4">
+        <div class="card text-white bg-primary h-100">
+            <div class="card-body">
+                <h5 class="card-title">Total Students</h5>
+                <p class="card-text display-4">{{ stats.total_students }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 col-sm-6 mb-4">
+        <div class="card text-white bg-success h-100">
+            <div class="card-body">
+                <h5 class="card-title">Aptitude Questions</h5>
+                <p class="card-text display-4">{{ stats.total_aptitude }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 col-sm-6 mb-4">
+        <div class="card text-white bg-info h-100">
+            <div class="card-body">
+                <h5 class="card-title">Coding Problems</h5>
+                <p class="card-text display-4">{{ stats.total_coding }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 col-sm-6 mb-4">
+        <div class="card text-dark bg-warning h-100">
+            <div class="card-body">
+                <h5 class="card-title">Companies</h5>
+                <p class="card-text display-4">{{ stats.total_companies }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 col-sm-6 mb-4">
+        <div class="card text-white bg-danger h-100">
+            <div class="card-body">
+                <h5 class="card-title">Mock Tests Attempted</h5>
+                <p class="card-text display-4">{{ stats.total_mock_tests }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

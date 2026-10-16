@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2 class="mb-4">Manage Interview Questions</h2>
+
+<div class="card mb-5 shadow-sm">
+    <div class="card-header bg-primary text-white">Add New Question</div>
+    <div class="card-body">
+        <form method="POST">
+            <div class="mb-3">
+                <label>Question</label>
+                <textarea name="question" class="form-control" required></textarea>
+            </div>
+            <div class="mb-3">
+                <label>Model Answer</label>
+                <textarea name="model_answer" class="form-control" rows="3" required></textarea>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label>Category</label>
+                    <input type="text" name="category" class="form-control" required placeholder="e.g. HR Interview Questions">
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label>Difficulty</label>
+                    <select name="difficulty" class="form-select">
+                        <option>Easy</option>
+                        <option>Medium</option>
+                        <option>Hard</option>
+                    </select>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success">Add Question</button>
+        </form>
+    </div>
+</div>
+
+<h4>Existing Questions</h4>
+<div class="table-responsive">
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Category</th>
+                <th>Question</th>
+                <th>Difficulty</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for q in questions %}
+            <tr>
+                <td>{{ q.category }}</td>
+                <td>{{ q.question }}</td>
+                <td>{{ q.difficulty }}</td>
+                <td>
+                    <a href="{{ url_for('admin.delete_interview', q_id=q._id) }}" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

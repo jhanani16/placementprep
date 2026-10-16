@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2 class="mb-4">Study Resources</h2>
+
+<div class="row mb-4">
+    <div class="col-md-6">
+        <form method="GET" class="d-flex">
+            <input class="form-control me-2" type="search" name="search" placeholder="Search resources..." value="{{ search }}">
+            <button class="btn btn-outline-primary" type="submit">Search</button>
+            {% if search %}
+            <a href="{{ url_for('resources.index') }}" class="btn btn-outline-secondary ms-2">Clear</a>
+            {% endif %}
+        </form>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-3 mb-4">
+        <div class="list-group" id="list-tab" role="tablist">
+            <a class="list-group-item list-group-item-action active" id="list-all-list" data-bs-toggle="list" href="#list-all" role="tab">All Resources</a>
+            {% for cat in categories %}
+            <a class="list-group-item list-group-item-action" id="list-{{ loop.index }}-list" data-bs-toggle="list" href="#list-{{ loop.index }}" role="tab">{{ cat }}</a>
+            {% endfor %}
+        </div>
+    </div>
+    
+    <div class="col-md-9">
+        <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="list-all" role="tabpanel">
+                <div class="row">
+                    {% for r in resources %}
+                    <div class="col-md-6 mb-3">
+                        <div class="card h-100 shadow-sm border-start border-primary border-4">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ r.title }}</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">{{ r.category }} | Added: {{ r.date_added }}</h6>
+                                <p class="card-text">{{ r.description }}</p>
+                                <button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modal{{ r._id }}">
+                                    Read Material
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Modal -->
+                    <div class="modal fade" id="modal{{ r._id }}" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">{{ r.title }}</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    {{ r.content | replace('\n', '<br>') | safe }}
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            
+            {% for cat in categories %}
+            <div class="tab-pane fade" id="list-{{ loop.index }}" role="tabpanel">
+                <div class="row">
+                    {% for r in resources %}
+                        {% if r.category == cat %}
+                        <div class="col-md-6 mb-3">
+                            <div class="card h-100 shadow-sm border-start border-primary border-4">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ r.title }}</h5>
+                                    <h6 class="card-subtitle mb-2 text-muted">{{ r.category }} | Added: {{ r.date_added }}</h6>
+                                    <p class="card-text">{{ r.description }}</p>
+                                    <button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modal{{ r._id }}">
+                                        Read Material
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

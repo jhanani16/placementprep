@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2 class="mb-4">Company Profiles</h2>
+
+<div class="row mb-4">
+    <div class="col-md-6">
+        <form method="GET" class="d-flex">
+            <input class="form-control me-2" type="search" name="search" placeholder="Search companies..." value="{{ search }}">
+            <button class="btn btn-outline-primary" type="submit">Search</button>
+            {% if search %}
+            <a href="{{ url_for('company.index') }}" class="btn btn-outline-secondary ms-2">Clear</a>
+            {% endif %}
+        </form>
+    </div>
+</div>
+
+<div class="row">
+    {% for company in companies %}
+    <div class="col-md-12 mb-4">
+        <div class="card shadow-sm">
+            <div class="card-header bg-light d-flex justify-content-between align-items-center">
+                <h4 class="mb-0">{{ company.name }}</h4>
+                <span class="badge {% if company.difficulty == 'Easy' %}bg-success{% elif company.difficulty == 'Medium' %}bg-warning text-dark{% else %}bg-danger{% endif %}">{{ company.difficulty }} Process</span>
+            </div>
+            <div class="card-body row">
+                <div class="col-md-8">
+                    <p>{{ company.description }}</p>
+                    <ul class="list-group list-group-flush mb-3">
+                        <li class="list-group-item"><strong>Job Roles:</strong> {{ company.job_roles }}</li>
+                        <li class="list-group-item"><strong>Required Skills:</strong> {{ company.skills }}</li>
+                        <li class="list-group-item"><strong>Eligibility:</strong> {{ company.eligibility }}</li>
+                        <li class="list-group-item"><strong>Selection Process:</strong> {{ company.selection_process }}</li>
+                    </ul>
+                </div>
+                <div class="col-md-4 border-start">
+                    <h6 class="text-primary">Preparation Focus</h6>
+                    <p class="small"><strong>Frequently Asked:</strong><br>{{ company.frequently_asked }}</p>
+                    <p class="small"><strong>Sample Question:</strong><br>{{ company.interview_questions }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="col-12">
+        <div class="alert alert-info">No companies found.</div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

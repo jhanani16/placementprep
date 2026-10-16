@@ -1,0 +1,37 @@
+body {
+    background-color: #f8f9fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.card {
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.navbar-brand {
+    font-weight: bold;
+}
+
+/* Custom styling for coding problems */
+pre {
+    margin-bottom: 0;
+}
+
+textarea.font-monospace {
+    font-family: 'Courier New', Courier, monospace;
+    background-color: #282c34;
+    color: #abb2bf;
+    border: none;
+    border-radius: 4px;
+    padding: 15px;
+}
+
+textarea.font-monospace:focus {
+    background-color: #282c34;
+    color: #abb2bf;
+    box-shadow: none;
+    outline: 1px solid #61afef;
+}

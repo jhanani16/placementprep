@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2 class="mb-4">Mock Tests</h2>
+<p>Take full-length mock tests to evaluate your preparation.</p>
+
+<div class="row">
+    {% for test in tests %}
+    <div class="col-md-6 mb-4">
+        <div class="card shadow-sm h-100 border-primary">
+            <div class="card-body">
+                <h4 class="card-title text-primary">{{ test.title }}</h4>
+                <ul class="list-unstyled mt-3">
+                    <li><strong>Duration:</strong> {{ test.duration }} minutes</li>
+                    <li><strong>Total Questions:</strong> {{ test.total_questions }}</li>
+                </ul>
+                <a href="{{ url_for('mock_test.take_test', test_id=test._id) }}" class="btn btn-primary mt-2">Start Mock Test</a>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="col-12">
+        <div class="alert alert-info">No mock tests available at the moment.</div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

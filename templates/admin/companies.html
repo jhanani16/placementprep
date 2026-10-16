@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2 class="mb-4">Manage Companies</h2>
+
+<div class="card mb-5 shadow-sm">
+    <div class="card-header bg-primary text-white">Add New Company</div>
+    <div class="card-body">
+        <form method="POST">
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label>Company Name</label>
+                    <input type="text" name="name" class="form-control" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label>Difficulty Level</label>
+                    <select name="difficulty" class="form-select">
+                        <option>Easy</option>
+                        <option>Medium</option>
+                        <option>Hard</option>
+                    </select>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label>Description</label>
+                <textarea name="description" class="form-control" rows="2" required></textarea>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label>Job Roles (Comma separated)</label>
+                    <input type="text" name="job_roles" class="form-control" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label>Required Skills</label>
+                    <input type="text" name="skills" class="form-control" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label>Eligibility Criteria</label>
+                    <input type="text" name="eligibility" class="form-control" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label>Selection Process</label>
+                    <input type="text" name="selection_process" class="form-control" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label>Frequently Asked Topics</label>
+                    <input type="text" name="frequently_asked" class="form-control">
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label>Sample Interview Questions</label>
+                    <input type="text" name="interview_questions" class="form-control">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success">Add Company</button>
+        </form>
+    </div>
+</div>
+
+<h4>Existing Companies</h4>
+<div class="table-responsive">
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Roles</th>
+                <th>Difficulty</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for c in companies %}
+            <tr>
+                <td>{{ c.name }}</td>
+                <td>{{ c.job_roles }}</td>
+                <td>{{ c.difficulty }}</td>
+                <td>
+                    <a href="{{ url_for('admin.delete_company', c_id=c._id) }}" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
